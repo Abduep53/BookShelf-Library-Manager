@@ -1,19 +1,20 @@
 {% extends 'library/base.html' %}
 
-{% block title %}Welcome to BookShelf{% endblock %}
+{% block title %}BookShelf by Neuro League - AI-Powered Library Assistant{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-lg-8 mx-auto text-center">
         <div class="hero-section">
             <h1 class="display-3 fw-bold mb-4">
-                <i class="bi bi-book-half text-primary"></i> Welcome to BookShelf
+                <i class="bi bi-book-half text-primary"></i> BookShelf by Neuro League
             </h1>
             <p class="lead mb-4">
-                Your personal library manager to track and organize your reading journey.
+                Your AI-powered library assistant that revolutionizes how you discover, organize, and enjoy books.
             </p>
             <p class="text-muted mb-5">
-                Keep track of books you're reading, completed, or planning to read. Monitor your progress and build your digital library with ease.
+                Experience the future of reading with our advanced AI technology. Get personalized book recommendations, 
+                intelligent insights, and seamless library management - all powered by cutting-edge artificial intelligence.
             </p>
             
             {% if user.is_authenticated %}
@@ -42,23 +43,47 @@
 <div class="row mt-5 pt-5">
     <div class="col-md-4 text-center mb-4">
         <div class="feature-box">
-            <i class="bi bi-book-fill text-primary display-4 mb-3"></i>
-            <h4>Track Your Books</h4>
-            <p class="text-muted">Keep a comprehensive list of all your books in one place.</p>
+            <i class="bi bi-robot text-primary display-4 mb-3"></i>
+            <h4>AI-Powered Recommendations</h4>
+            <p class="text-muted">Get personalized book suggestions based on your reading history and preferences using advanced AI algorithms.</p>
         </div>
     </div>
     <div class="col-md-4 text-center mb-4">
         <div class="feature-box">
-            <i class="bi bi-graph-up text-success display-4 mb-3"></i>
-            <h4>Monitor Progress</h4>
-            <p class="text-muted">See your reading progress with visual statistics.</p>
+            <i class="bi bi-cpu text-success display-4 mb-3"></i>
+            <h4>Smart Library Analysis</h4>
+            <p class="text-muted">Discover patterns and insights in your reading habits with AI-driven analytics.</p>
         </div>
     </div>
     <div class="col-md-4 text-center mb-4">
         <div class="feature-box">
-            <i class="bi bi-funnel text-info display-4 mb-3"></i>
-            <h4>Filter & Organize</h4>
-            <p class="text-muted">Filter books by status: Reading, Completed, or Planned.</p>
+            <i class="bi bi-lightning text-info display-4 mb-3"></i>
+            <h4>Intelligent Organization</h4>
+            <p class="text-muted">Auto-categorize and tag your books using AI for effortless library management.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-book-fill text-warning display-4 mb-3"></i>
+            <h4>Reading Insights</h4>
+            <p class="text-muted">Get AI-generated summaries and key takeaways from your books.</p>
+        </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-graph-up text-danger display-4 mb-3"></i>
+            <h4>Progress Tracking</h4>
+            <p class="text-muted">Monitor your reading goals with smart progress tracking and predictions.</p>
+        </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-people text-purple display-4 mb-3"></i>
+            <h4>Community Insights</h4>
+            <p class="text-muted">Connect with readers who share your interests through AI-powered matching.</p>
         </div>
     </div>
 </div>

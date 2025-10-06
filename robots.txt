@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Sitemap: https://bookshelf.neuroleague.com/sitemap.xml
+
+# Disallow admin and authentication pages
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/

@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BookShelf by Neuro League - Your AI-powered personal library assistant. Organize, discover, and get intelligent book recommendations using advanced AI technology.">
+    <meta name="keywords" content="AI book assistant, personal library manager, book recommendations, reading list organizer, artificial intelligence books, BookShelf, Neuro League">
+    <meta name="author" content="Neuro League">
+    <meta property="og:title" content="BookShelf by Neuro League - AI-Powered Library Assistant">
+    <meta property="og:description" content="Transform your reading experience with AI-powered book recommendations and library management.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BookShelf by Neuro League">
+    <meta name="twitter:description" content="Your AI-powered personal library assistant">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQQBXK5CKM"></script>
     <script>
@@ -12,7 +21,7 @@
 
         gtag('config', 'G-ZQQBXK5CKM');
     </script>
-    <title>{% block title %}BookShelf - Personal Library Manager{% endblock %}</title>
+    <title>{% block title %}BookShelf by Neuro League - AI-Powered Library Assistant{% endblock %}</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +37,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{% url 'index' %}">
-                <i class="bi bi-book"></i> BookShelf
+                <i class="bi bi-book"></i> BookShelf by Neuro League
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -91,9 +100,43 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
+    <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
-            <p class="mb-0">&copy; 2024 BookShelf - CS50W Capstone Project</p>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>About BookShelf</h5>
+                    <p class="text-muted">Your AI-powered personal library assistant. Organize your books, get intelligent recommendations, and discover new reads with advanced AI technology.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'index' %}" class="text-muted">Home</a></li>
+                        <li><a href="{% url 'ai_tools' %}" class="text-muted">AI Features</a></li>
+                        <li><a href="#" class="text-muted">About Us</a></li>
+                        <li><a href="#" class="text-muted">Contact</a></li>
+                        <li><a href="#" class="text-muted">Privacy Policy</a></li>
+                        <li><a href="#" class="text-muted">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="bi bi-envelope"></i> support@neuroleague.com</li>
+                        <li><i class="bi bi-geo-alt"></i> New York, NY</li>
+                        <li><i class="bi bi-telephone"></i> +1 (555) 123-4567</li>
+                    </ul>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-muted me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 border-secondary">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 BookShelf by Neuro League. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
