@@ -1,0 +1,136 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Dashboard - BookShelf{% endblock %}
+
+{% block content %}
+<div class="dashboard-header mb-4">
+    <h1 class="display-5 fw-bold"><i class="bi bi-grid-3x3-gap"></i> My Library</h1>
+    <p class="text-muted">Welcome back, {{ user.username }}! Here's your reading progress.</p>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card text-center bg-primary text-white">
+            <div class="card-body">
+                <h3 class="card-title">{{ total_books }}</h3>
+                <p class="card-text">Total Books</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center bg-success text-white">
+            <div class="card-body">
+                <h3 class="card-title">{{ completed_books }}</h3>
+                <p class="card-text">Completed</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center bg-warning text-white">
+            <div class="card-body">
+                <h3 class="card-title">{{ reading_books }}</h3>
+                <p class="card-text">Reading</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center bg-info text-white">
+            <div class="card-body">
+                <h3 class="card-title">{{ planned_books }}</h3>
+                <p class="card-text">Planned</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Reading Progress</h5>
+        <div class="progress" style="height: 30px;">
+            <div class="progress-bar bg-success" role="progressbar" 
+                 style="width: {{ completion_percentage }}%;" 
+                 aria-valuenow="{{ completion_percentage }}" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+                {{ completion_percentage }}% Complete
+            </div>
+        </div>
+        <p class="text-muted mt-2 mb-0">
+            You've completed {{ completed_books }} out of {{ total_books }} books!
+        </p>
+    </div>
+</div>
+
+<!-- Filter Buttons -->
+<div class="mb-3">
+    <div class="btn-group" role="group">
+        <a href="{% url 'dashboard' %}" class="btn {% if not status_filter %}btn-primary{% else %}btn-outline-primary{% endif %}">
+            All Books
+        </a>
+        <a href="?status=Reading" class="btn {% if status_filter == 'Reading' %}btn-warning{% else %}btn-outline-warning{% endif %}">
+            Reading
+        </a>
+        <a href="?status=Completed" class="btn {% if status_filter == 'Completed' %}btn-success{% else %}btn-outline-success{% endif %}">
+            Completed
+        </a>
+        <a href="?status=Planned" class="btn {% if status_filter == 'Planned' %}btn-info{% else %}btn-outline-info{% endif %}">
+            Planned
+        </a>
+    </div>
+</div>
+
+<!-- Books List -->
+{% if books %}
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card book-card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h6>
+                <p class="mb-2">
+                    <span class="badge 
+                        {% if book.status == 'Reading' %}bg-warning
+                        {% elif book.status == 'Completed' %}bg-success
+                        {% else %}bg-info
+                        {% endif %}">
+                        {{ book.status }}
+                    </span>
+                </p>
+                <p class="card-text text-muted small">
+                    <i class="bi bi-calendar"></i> Added: {{ book.date_added|date:"M d, Y" }}
+                </p>
+                
+                <div class="btn-group w-100 mt-2" role="group">
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        Change Status
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item update-status" href="#" data-book-id="{{ book.id }}" data-status="Reading">Reading</a></li>
+                        <li><a class="dropdown-item update-status" href="#" data-book-id="{{ book.id }}" data-status="Completed">Completed</a></li>
+                        <li><a class="dropdown-item update-status" href="#" data-book-id="{{ book.id }}" data-status="Planned">Planned</a></li>
+                    </ul>
+                    <button type="button" class="btn btn-sm btn-outline-danger delete-book" data-book-id="{{ book.id }}">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <h4><i class="bi bi-info-circle"></i> No books found</h4>
+    <p>Start building your library by <a href="{% url 'add_book' %}" class="alert-link">adding your first book</a>!</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+{% load static %}
+<script src="{% static 'library/dashboard.js' %}"></script>
+{% endblock %}
+

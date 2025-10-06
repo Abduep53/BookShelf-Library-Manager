@@ -1,0 +1,66 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Welcome to BookShelf{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+        <div class="hero-section">
+            <h1 class="display-3 fw-bold mb-4">
+                <i class="bi bi-book-half text-primary"></i> Welcome to BookShelf
+            </h1>
+            <p class="lead mb-4">
+                Your personal library manager to track and organize your reading journey.
+            </p>
+            <p class="text-muted mb-5">
+                Keep track of books you're reading, completed, or planning to read. Monitor your progress and build your digital library with ease.
+            </p>
+            
+            {% if user.is_authenticated %}
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                    <i class="bi bi-grid-3x3-gap"></i> Go to Dashboard
+                </a>
+                <a href="{% url 'add_book' %}" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="bi bi-plus-circle"></i> Add a Book
+                </a>
+            </div>
+            {% else %}
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                    <i class="bi bi-person-plus"></i> Get Started
+                </a>
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5">
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-book-fill text-primary display-4 mb-3"></i>
+            <h4>Track Your Books</h4>
+            <p class="text-muted">Keep a comprehensive list of all your books in one place.</p>
+        </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-graph-up text-success display-4 mb-3"></i>
+            <h4>Monitor Progress</h4>
+            <p class="text-muted">See your reading progress with visual statistics.</p>
+        </div>
+    </div>
+    <div class="col-md-4 text-center mb-4">
+        <div class="feature-box">
+            <i class="bi bi-funnel text-info display-4 mb-3"></i>
+            <h4>Filter & Organize</h4>
+            <p class="text-muted">Filter books by status: Reading, Completed, or Planned.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
