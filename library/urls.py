@@ -11,5 +11,11 @@ urlpatterns = [
     path('auth/login/', views.login_view, name='login'),
     path('auth/logout/', views.logout_view, name='logout'),
     path('profile/', views.profile_view, name='profile'),
+    
+    # AI Tools routes
+    path('ai/', views.ai_tools_view, name='ai_tools'),
+    path('ai/summarize/', views.ai_summarize, name='ai_summarize'),
+    path('ai/recommend/', views.ai_recommend, name='ai_recommend'),
+    path('ai/quiz/', views.ai_quiz, name='ai_quiz'),
 ]
 

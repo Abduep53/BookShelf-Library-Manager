@@ -1,0 +1,152 @@
+═══════════════════════════════════════════════════════════════
+    BOOKSHELF AI TOOLS - SETUP INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+🎉 NEW FEATURE: AI Tools Page Successfully Added!
+
+The AI Tools page is now available at: /ai/
+
+═══════════════════════════════════════════════════════════════
+    QUICK SETUP (3 STEPS)
+═══════════════════════════════════════════════════════════════
+
+STEP 1: Install Dependencies
+────────────────────────────────────────────────────────────────
+Run this command in your project directory:
+
+    pip install -r requirements.txt
+
+This installs:
+  • openai>=1.0.0
+  • python-dotenv>=1.0.0
+
+────────────────────────────────────────────────────────────────
+STEP 2: Create .env File with Your OpenAI API Key
+────────────────────────────────────────────────────────────────
+
+A. Get your OpenAI API key:
+   1. Visit: https://platform.openai.com/api-keys
+   2. Click "Create new secret key"
+   3. Copy the key (starts with "sk-...")
+
+B. Create .env file in project root:
+   
+   Windows PowerShell:
+   New-Item -Path .env -ItemType File
+   notepad .env
+
+   macOS/Linux:
+   touch .env
+   nano .env
+
+C. Add this line to .env (replace with your actual key):
+   
+   OPENAI_API_KEY=sk-your-actual-api-key-here
+
+   IMPORTANT: Replace "sk-your-actual-api-key-here" with your real key!
+
+D. Save and close the file
+
+────────────────────────────────────────────────────────────────
+STEP 3: Restart Django Server
+────────────────────────────────────────────────────────────────
+
+Stop the server (Ctrl+C) and restart:
+
+    python manage.py runserver
+
+═══════════════════════════════════════════════════════════════
+    ACCESSING AI TOOLS
+═══════════════════════════════════════════════════════════════
+
+1. Log in to your BookShelf account
+2. Click "AI Tools" in the navigation bar
+3. Or go to: http://127.0.0.1:8000/ai/
+
+═══════════════════════════════════════════════════════════════
+    AVAILABLE AI FEATURES
+═══════════════════════════════════════════════════════════════
+
+✅ AI Book Summarizer
+   → Paste any text and get an AI-generated summary
+
+✅ AI Book Recommender
+   → Enter a topic and get 3-5 book recommendations
+
+✅ AI Quiz Generator
+   → Enter book title, author, and difficulty level
+   → Get 5 quiz questions with answers
+
+🔜 Chat with Your Book (Coming Soon)
+🔜 AI Progress Predictor (Coming Soon)
+
+═══════════════════════════════════════════════════════════════
+    WHAT'S NEW IN YOUR PROJECT
+═══════════════════════════════════════════════════════════════
+
+NEW FILES:
+  ✓ library/templates/library/ai_tools.html
+  ✓ AI_TOOLS_SETUP.md (detailed guide)
+  ✓ SETUP_INSTRUCTIONS.txt (this file)
+
+MODIFIED FILES:
+  ✓ library/views.py (added 4 new views)
+  ✓ library/urls.py (added 4 new routes)
+  ✓ library/templates/library/base.html (added AI Tools navbar link)
+  ✓ BookShelf/settings.py (added OpenAI configuration)
+  ✓ requirements.txt (added openai and python-dotenv)
+  ✓ README.md (added comprehensive AI Tools documentation)
+
+═══════════════════════════════════════════════════════════════
+    SECURITY NOTES
+═══════════════════════════════════════════════════════════════
+
+✅ API key stored securely in .env (already in .gitignore)
+✅ API key NEVER exposed to frontend JavaScript
+✅ All API calls go through Django backend
+✅ CSRF protection enabled on all endpoints
+
+═══════════════════════════════════════════════════════════════
+    TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Error: "OpenAI API key not configured"
+→ Check that .env file exists in project root
+→ Verify .env contains: OPENAI_API_KEY=sk-...
+→ Restart Django server
+
+Error: "Invalid API key"
+→ Verify you copied the entire key (starts with sk-)
+→ Check for extra spaces or quotes
+→ Generate a new key if needed
+
+AI not responding / taking too long
+→ Check your internet connection
+→ Verify OpenAI API status: https://status.openai.com
+→ Try again (occasional timeouts are normal)
+
+═══════════════════════════════════════════════════════════════
+    COST INFORMATION
+═══════════════════════════════════════════════════════════════
+
+Using GPT-3.5-turbo:
+  • ~$0.001-0.004 per request
+  • Typical usage: 100 requests ≈ $0.20-0.40/month
+
+Monitor usage at: https://platform.openai.com/usage
+
+═══════════════════════════════════════════════════════════════
+    RESOURCES
+═══════════════════════════════════════════════════════════════
+
+📖 Detailed Setup Guide: See AI_TOOLS_SETUP.md
+📖 Full Documentation: See README.md (AI Tools Feature section)
+🌐 OpenAI Docs: https://platform.openai.com/docs
+🔑 Manage API Keys: https://platform.openai.com/api-keys
+
+═══════════════════════════════════════════════════════════════
+
+🎉 You're all set! Enjoy your AI-powered reading experience!
+
+═══════════════════════════════════════════════════════════════
+

@@ -1,0 +1,545 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}Neuro League BookShelf | AI Tools{% endblock %}
+
+{% block extra_css %}
+<style>
+    .ai-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+        border-radius: 10px;
+    }
+    
+    .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .coming-soon-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .result-box {
+        background-color: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        border-radius: 5px;
+        display: none;
+    }
+    
+    .book-card {
+        border-left: 3px solid #764ba2;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+    }
+    
+    .quiz-question {
+        background-color: #fff;
+        border: 2px solid #667eea;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+    
+    .loading {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .spinner-border {
+        color: #667eea;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- AI Tools Header -->
+<div class="ai-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-cpu"></i> AI Tools
+        </h1>
+        <p class="lead mb-0">Supercharge your reading with AI-powered features</p>
+    </div>
+</div>
+
+<!-- Feature Cards Grid -->
+<div class="row g-4">
+    <!-- AI Book Summarizer -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card feature-card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="bi bi-file-text"></i>
+                </div>
+                <h5 class="card-title fw-bold">AI Book Summarizer</h5>
+                <p class="card-text text-muted">
+                    Get concise, intelligent summaries of your book passages instantly.
+                </p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#summarizerModal">
+                    Try Now <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Book Recommender -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card feature-card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="bi bi-lightbulb"></i>
+                </div>
+                <h5 class="card-title fw-bold">AI Book Recommender</h5>
+                <p class="card-text text-muted">
+                    Discover your next great read based on your interests and preferences.
+                </p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recommenderModal">
+                    Try Now <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Quiz Generator -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card feature-card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+                <h5 class="card-title fw-bold">AI Quiz Generator</h5>
+                <p class="card-text text-muted">
+                    Test your knowledge with AI-generated quizzes tailored to your books.
+                </p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quizModal">
+                    Try Now <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat with Your Book - Coming Soon -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card feature-card h-100 position-relative">
+            <span class="coming-soon-badge">Coming Soon</span>
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+                <h5 class="card-title fw-bold">Chat with Your Book</h5>
+                <p class="card-text text-muted">
+                    Have an interactive conversation with your books using AI.
+                </p>
+                <button class="btn btn-secondary" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Progress Predictor - Coming Soon -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card feature-card h-100 position-relative">
+            <span class="coming-soon-badge">Coming Soon</span>
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <h5 class="card-title fw-bold">AI Progress Predictor</h5>
+                <p class="card-text text-muted">
+                    Predict your reading completion time based on your habits and pace.
+                </p>
+                <button class="btn btn-secondary" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Book Summarizer Modal -->
+<div class="modal fade" id="summarizerModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-file-text"></i> AI Book Summarizer
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="summarizerForm">
+                    <div class="mb-3">
+                        <label for="textToSummarize" class="form-label fw-bold">
+                            Enter Text to Summarize
+                        </label>
+                        <textarea 
+                            class="form-control" 
+                            id="textToSummarize" 
+                            rows="6" 
+                            placeholder="Paste a book passage, article excerpt, or any text you'd like summarized..."
+                            required
+                        ></textarea>
+                        <div class="form-text">
+                            Paste any text and AI will generate a concise summary for you.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-magic"></i> Generate Summary
+                    </button>
+                </form>
+
+                <div class="loading" id="summarizerLoading">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">AI is generating your summary...</p>
+                </div>
+
+                <div class="result-box" id="summarizerResult">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-check-circle-fill text-success"></i> Summary
+                    </h6>
+                    <p id="summaryText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Book Recommender Modal -->
+<div class="modal fade" id="recommenderModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-lightbulb"></i> AI Book Recommender
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="recommenderForm">
+                    <div class="mb-3">
+                        <label for="bookTopic" class="form-label fw-bold">
+                            What are you interested in?
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="bookTopic" 
+                            placeholder="e.g., science fiction, self-improvement, history, mystery..."
+                            required
+                        />
+                        <div class="form-text">
+                            Enter a topic, genre, or theme and get AI-powered book recommendations.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-magic"></i> Get Recommendations
+                    </button>
+                </form>
+
+                <div class="loading" id="recommenderLoading">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">AI is finding perfect books for you...</p>
+                </div>
+
+                <div class="result-box" id="recommenderResult">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-check-circle-fill text-success"></i> Recommended Books
+                    </h6>
+                    <div id="bookRecommendations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Quiz Generator Modal -->
+<div class="modal fade" id="quizModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-question-circle"></i> AI Quiz Generator
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="quizForm">
+                    <div class="mb-3">
+                        <label for="quizBookTitle" class="form-label fw-bold">Book Title</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="quizBookTitle" 
+                            placeholder="e.g., To Kill a Mockingbird"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="quizBookAuthor" class="form-label fw-bold">Author</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="quizBookAuthor" 
+                            placeholder="e.g., Harper Lee"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="quizDifficulty" class="form-label fw-bold">Difficulty Level</label>
+                        <select class="form-select" id="quizDifficulty" required>
+                            <option value="">Select difficulty...</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-magic"></i> Generate Quiz
+                    </button>
+                </form>
+
+                <div class="loading" id="quizLoading">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">AI is creating your quiz...</p>
+                </div>
+
+                <div class="result-box" id="quizResult">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-check-circle-fill text-success"></i> Quiz Questions
+                    </h6>
+                    <div id="quizQuestions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Get CSRF token for Django POST requests
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+
+    // AI Book Summarizer
+    document.getElementById('summarizerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const text = document.getElementById('textToSummarize').value;
+        const loading = document.getElementById('summarizerLoading');
+        const result = document.getElementById('summarizerResult');
+        
+        // Show loading, hide result
+        loading.style.display = 'block';
+        result.style.display = 'none';
+        
+        try {
+            const response = await fetch('/ai/summarize/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ text: text })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                document.getElementById('summaryText').textContent = data.summary;
+                result.style.display = 'block';
+            } else {
+                alert('Error: ' + data.error);
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+            console.error('Error:', error);
+        } finally {
+            loading.style.display = 'none';
+        }
+    });
+
+    // AI Book Recommender
+    document.getElementById('recommenderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const topic = document.getElementById('bookTopic').value;
+        const loading = document.getElementById('recommenderLoading');
+        const result = document.getElementById('recommenderResult');
+        
+        // Show loading, hide result
+        loading.style.display = 'block';
+        result.style.display = 'none';
+        
+        try {
+            const response = await fetch('/ai/recommend/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ topic: topic })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                const recommendations = data.recommendations;
+                let html = '';
+                
+                recommendations.forEach((book, index) => {
+                    html += `
+                        <div class="book-card">
+                            <h6 class="fw-bold text-primary">${index + 1}. ${book.title}</h6>
+                            <p class="mb-1"><strong>Author:</strong> ${book.author}</p>
+                            <p class="mb-0 text-muted">${book.description}</p>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('bookRecommendations').innerHTML = html;
+                result.style.display = 'block';
+            } else {
+                alert('Error: ' + data.error);
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+            console.error('Error:', error);
+        } finally {
+            loading.style.display = 'none';
+        }
+    });
+
+    // AI Quiz Generator
+    document.getElementById('quizForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const title = document.getElementById('quizBookTitle').value;
+        const author = document.getElementById('quizBookAuthor').value;
+        const difficulty = document.getElementById('quizDifficulty').value;
+        const loading = document.getElementById('quizLoading');
+        const result = document.getElementById('quizResult');
+        
+        // Show loading, hide result
+        loading.style.display = 'block';
+        result.style.display = 'none';
+        
+        try {
+            const response = await fetch('/ai/quiz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ 
+                    title: title,
+                    author: author,
+                    difficulty: difficulty
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                const questions = data.questions;
+                let html = '';
+                
+                questions.forEach((q, index) => {
+                    html += `
+                        <div class="quiz-question">
+                            <h6 class="fw-bold mb-3">Question ${index + 1}</h6>
+                            <p class="mb-2"><strong>${q.question}</strong></p>
+                            <p class="mb-0">
+                                <span class="badge bg-success">Answer:</span> 
+                                <span class="ms-2">${q.answer}</span>
+                            </p>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('quizQuestions').innerHTML = html;
+                result.style.display = 'block';
+            } else {
+                alert('Error: ' + data.error);
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+            console.error('Error:', error);
+        } finally {
+            loading.style.display = 'none';
+        }
+    });
+
+    // Reset modals when closed
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('hidden.bs.modal', function () {
+            const form = this.querySelector('form');
+            const loading = this.querySelector('.loading');
+            const result = this.querySelector('.result-box');
+            
+            if (form) form.reset();
+            if (loading) loading.style.display = 'none';
+            if (result) result.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}
+
